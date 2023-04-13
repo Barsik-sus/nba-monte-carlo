@@ -41,7 +41,7 @@ Want to try MDS-in-a-box right away? Create a Codespace:
 
 You can run in the Codespace by running the following command:
 ```
-make build pipeline superset-visuals
+make build superset-visuals
 ```
 You will need to wait for the pipeline to run and Superset configuration to complete. The 4-core codespace performs signifcantly better in testing, and is recommended for a better experience.
 
@@ -79,7 +79,7 @@ cd nba-monte-carlo
 ```
 5. build your project
 ```
-make build pipeline superset-visuals
+make build superset-visuals
 ```
 Make sure to open up superset when prompted (default location is 127.0.0.1:8088). 
 The username and password is "admin" and "password".
@@ -111,7 +111,7 @@ docker-run:
 		--env MDS_LATEST_RATINGS=true \
 		--env MDS_ENABLE_EXPORT=true \
 		--env ENVIRONMENT=docker \
-		mdsbox make pipeline superset-visuals
+		mdsbox make superset-visuals
 ```
 You can then scale out to Kubernetes, assuming you have it installed:
 ```

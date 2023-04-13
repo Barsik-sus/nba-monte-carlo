@@ -20,38 +20,11 @@ plugins:
     - name: tap-spreadsheets-anywhere
       variant: ets
       pip_url: git+https://github.com/ets/tap-spreadsheets-anywhere.git
-      config:
-        tables:
-          - path: file://./data
-            name: nba_schedule_2023
-            pattern: nba_schedule_2023.csv
-            start_date: "2001-01-01T00:00:00Z"
-            key_properties: [key]
-            format: csv
-          - path: file://./data
-            name: team_ratings
-            pattern: team_ratings.csv
-            start_date: "2001-01-01T00:00:00Z"
-            key_properties: [team]
-            format: csv
-          - path: file://./data
-            name: xf_series_to_seed
-            pattern: xf_series_to_seed.csv
-            start_date: "2001-01-01T00:00:00Z"
-            key_properties: [series_id]
-            format: csv
-          - path: https://projects.fivethirtyeight.com/nba-model
-            name: nba_elo_latest
-            pattern: nba_elo_latest.csv
-            start_date: "2001-01-01T00:00:00Z"
-            key_properties: [date, team1, team2]
-            format: csv
   loaders:
     - name: target-parquet
       variant: estrategiahq
       pip_url: git+https://github.com/estrategiahq/target-parquet.git
       config:
-        destination_path: $MELTANO_PROJECT_ROOT/data/data_catalog/psa
         file_size: 100000
         compression_method: snappy
         streams_in_separate_folder: true
@@ -74,9 +47,6 @@ plugins:
       pip_url: dbt-core~=1.4.0 dbt-duckdb~=1.4.0 git+https://github.com/meltano/dbt-ext.git duckdb==0.7.1
       executable: dbt_invoker
       settings:
-        - name: project_dir
-          value: $MELTANO_PROJECT_ROOT/transform
-          label: Projects Directory
         - name: skip_pre_invoke
           env: DBT_EXT_SKIP_PRE_INVOKE
           kind: boolean
@@ -87,13 +57,6 @@ plugins:
         - name: type
           env: DBT_EXT_TYPE
           value: duckdb
-        - name: profiles_dir
-          env: DBT_PROFILES_DIR
-          value: $MELTANO_PROJECT_ROOT/transform/profiles/duckdb
-          label: Profiles Directory
-        - name: project_dir
-          value: $MELTANO_PROJECT_ROOT/transform
-          label: Projects Directory
         - name: path
           kind: string
           label: Path
@@ -115,8 +78,6 @@ plugins:
         initialize:
           args: initialize
           executable: dbt_extension
-      config:
-        path: $MELTANO_PROJECT_ROOT/data/data_catalog/mdsbox.db
   mappers:
    - name: meltano-map-transformer
      variant: meltano

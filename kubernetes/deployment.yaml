@@ -18,8 +18,6 @@ spec:
       containers:
         - name: mdsbox
           image: mdsbox
-          command: ["make"]
-          args: ["pipeline"]
           imagePullPolicy: Never
           resources:
           limits:

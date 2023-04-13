@@ -31,8 +31,5 @@ RUN meltano --log-level=debug --environment=docker install loaders
 RUN meltano --log-level=debug --environment=docker install mappers
 RUN meltano --log-level=debug --environment=docker install utility dbt-duckdb
 
-COPY data ./data
-COPY transform ./transform
-COPY visuals ./visuals
 COPY Makefile .
 COPY analyze ./analyze

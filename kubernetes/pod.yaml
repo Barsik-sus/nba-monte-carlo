@@ -7,8 +7,6 @@ spec:
   containers:
     - name: nginx
       image: mdsbox
-      command: ["make"]
-      args: ["pipeline"]
       imagePullPolicy: Never
       resources:
         limits:
