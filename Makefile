@@ -4,6 +4,9 @@ build:
 docker-build:
 	docker build -t mdsbox .
 
+pipeline:
+	meltano run tap-parquet target-duckdb
+
 superset-visuals:
 	meltano install utility superset
 	meltano invoke superset fab create-admin --username admin --firstname lebron --lastname james --email admin@admin.org --password password
@@ -18,7 +21,7 @@ docker-run-superset:
 		--env MDS_LATEST_RATINGS=true \
 		--env MDS_ENABLE_EXPORT=true \
 		--env ENVIRONMENT=docker \
-		mdsbox make superset-visuals
+		mdsbox make pipeline superset-visuals
 
 evidence-build:
 	cd analyze && npm i -force
@@ -31,7 +34,7 @@ evidence-visuals:
 	make evidence-run
 
 docker-run-evidence:
-		docker run \
+	docker run \
 		--publish 3000:3000 \
 	 	--env MELTANO_CLI_LOG_LEVEL=WARNING \
 		--env MDS_SCENARIOS=10000 \

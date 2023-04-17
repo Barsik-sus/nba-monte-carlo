@@ -1,0 +1,34 @@
+{
+  "plugin_type": "extractors",
+  "name": "tap-parquet",
+  "namespace": "tap_parquet",
+  "variant": "dataops-tk",
+  "label": "Parquet",
+  "docs": "https://hub.meltano.com/extractors/tap-parquet--dataops-tk",
+  "repo": "https://github.com/dataops-tk/tap-parquet",
+  "pip_url": "git+https://github.com/dataops-tk/tap-parquet.git",
+  "description": "Columnar Storage Format",
+  "logo_url": "https://hub.meltano.com/assets/logos/extractors/parquet.png",
+  "capabilities": [
+    "catalog",
+    "state",
+    "discover"
+  ],
+  "settings_group_validation": [
+    [
+      "filepath"
+    ]
+  ],
+  "settings": [
+    {
+      "name": "start_date",
+      "label": "Start Date",
+      "description": "Determines how much historical data will be extracted. Please be aware\nthat the larger the time period and amount of data, the longer the initial extraction\ncan be expected to take."
+    },
+    {
+      "name": "filepath",
+      "label": "Filepath",
+      "description": "The absolute path to a parquet source file."
+    }
+  ]
+}
